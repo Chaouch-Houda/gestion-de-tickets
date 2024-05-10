@@ -1,0 +1,6 @@
+{# templates/ticket/_form_buy.html.twig #}
+
+<form action="{{ path('app_ticket_buy', { 'id': ticket.id }) }}" method="POST">
+    {# {{ csrf_token('buy_ticket') }} #}
+    <button type="submit" class="btn btn-primary" >Acheter le ticket</button>
+</form>

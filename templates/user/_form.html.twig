@@ -1,0 +1,90 @@
+{% block stylesheets %}
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        /* Cibler les messages d'erreur */
+        .form-group .form-error {
+            color: red;
+            font-size: 14px; 
+            margin-top: 5px; 
+
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.email, 'Email', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.email) %}
+            <div class="form-error">
+                {{ form_errors(form.email) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.nom, 'Last Name', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.nom) %}
+            <div class="form-error">
+                {{ form_errors(form.nom) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.prenom, 'First Name', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.prenom) %}
+            <div class="form-error">
+                {{ form_errors(form.prenom) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.password, 'Password', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.password) %}
+            <div class="form-error">
+                {{ form_errors(form.password) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.roles, 'Roles', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form.roles, {'attr': {'class': 'form-control'}}) }}
+        {% if form_errors(form.roles) %}
+            <div class="form-error">
+                {{ form_errors(form.roles) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+
+
+
+{% endblock %}
+

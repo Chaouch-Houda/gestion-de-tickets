@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .registerForm input , .registerForm select {
+            margin-bottom: 15px;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<form method="post" class="registerForm">
+    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email, {
+            attr: {class: 'form-control', autocomplete: 'email', required: 'required', autofocus: 'autofocus'}
+        }) }}
+        {{ form_row(registrationForm.nom, {
+            label: 'Last Name',
+            attr: {class: 'form-control', required: 'required'}
+        }) }}
+        {{ form_row(registrationForm.prenom, {
+            label: 'First Name',
+            attr: {class: 'form-control', required: 'required'}
+        }) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password',
+            attr: {class: 'form-control', autocomplete: 'current-password', required: 'required'}
+        }) }}
+
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button class="btn btn-lg btn-primary" type="submit">Register</button>
+    {{ form_end(registrationForm) }}
+</form>
+{% endblock %}

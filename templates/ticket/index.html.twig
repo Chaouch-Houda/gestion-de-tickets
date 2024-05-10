@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticket index{% endblock %}
+
+{% block body %}
+    <h1>Ticket index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prix</th>
+                <th>Emplacement</th>
+                <th>Selected</th>
+                <th>Spectateur</th> {# Nouvelle colonne pour afficher le nom du spectateur #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.id }}</td>
+                <td>{{ ticket.prix }}</td>
+                <td>{{ ticket.emplacement }}</td>
+                <td>{{ ticket.selected ? 'Yes' : 'No' }}</td>
+                <td>
+                    {% if ticket.spectateur is not null %}
+                        <td>{{ ticket.spectateur.getNom() }} {{ ticket.spectateur.getPrenom() }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="d-flex gap-3">
+                        <div class="btn btn-info"><a href="{{ path('app_ticket_show', {'id': ticket.id}) }}" style="color:white; text-decoration:none">show</a></div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_ticket_edit', {'id': ticket.id}) }}">edit</a>
+                        {% elseif is_granted('ROLE_SPECTATEUR') %}
+                            {{ include('ticket/_form_buy.html.twig') }}
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_ticket_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}
